@@ -19,7 +19,7 @@ export default function Login({ onLogin }) {
     setSuccess('');
     
     try {
-      const response = await axios.post('http://localhost:5000/api/login', {
+      const response = await axios.post('https://payroll-system-1-usc4.onrender.com/api/login', {
         email: email,
         password: password
       });
@@ -49,7 +49,7 @@ export default function Login({ onLogin }) {
 
     try {
       // Pendaftaran mandiri dari karyawan -> otomatis status 'pending' di backend
-      await axios.post('http://localhost:5000/api/karyawan', {
+      await axios.post('https://payroll-system-1-usc4.onrender.com/api/karyawan', {
         nama,
         email,
         password,
