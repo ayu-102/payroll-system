@@ -150,6 +150,7 @@ export default function Login({ onLogin }) {
                 <input 
                   type={showPassword ? 'text' : 'password'} 
                   placeholder="Buat password baru" 
+                  autoComplete="new-password"
                   className="w-full p-3 pr-12 border border-gray-200 rounded-xl bg-gray-50/50 text-sm outline-none text-black focus:border-orange-400 focus:ring-4 focus:ring-orange-50 transition"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
@@ -215,6 +216,7 @@ export default function Login({ onLogin }) {
                 <input 
                   type={showPassword ? 'text' : 'password'} 
                   placeholder="Masukkan password" 
+                  autoComplete="current-password"
                   className="w-full p-3 pr-12 border border-gray-200 rounded-xl bg-gray-50/50 text-sm outline-none text-black focus:border-orange-400 focus:ring-4 focus:ring-orange-50 transition"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
