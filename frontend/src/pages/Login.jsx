@@ -214,14 +214,16 @@ export default function Login({ onLogin }) {
               <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1.5">Password</label>
               <div className="relative">
                 <input 
-                  type={showPassword ? 'text' : 'password'} 
-                  placeholder="Masukkan password" 
-                  autoComplete="current-password"
-                  className="w-full p-3 pr-12 border border-gray-200 rounded-xl bg-gray-50/50 text-sm outline-none text-black focus:border-orange-400 focus:ring-4 focus:ring-orange-50 transition"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
+  type={showPassword ? 'text' : 'password'} 
+  placeholder="Masukkan password" 
+  autoComplete="off"
+  data-lpignore="true"
+  data-form-type="other"
+  className="w-full p-3 pr-12 border border-gray-200 rounded-xl bg-gray-50/50 text-sm outline-none text-black focus:border-orange-400 focus:ring-4 focus:ring-orange-50 transition"
+  value={password}
+  onChange={(e) => setPassword(e.target.value)}
+  required
+/>
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
