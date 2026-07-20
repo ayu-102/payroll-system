@@ -17,34 +17,27 @@ app.use(express.json());
 // =========================================================================
 // ANTI-CRASH DATABASE CHECKER (Aman dari Error ALTER TABLE)
 // =========================================================================
+// =========================================================================
+// ANTI-CRASH DATABASE CHECKER (Sesuai dengan database.js)
+// =========================================================================
 db.serialize(() => {
-    // 1. Buat tabel jika belum ada
+    // Pastikan tabel sesuai dengan yang ada di database.js
     db.run(`CREATE TABLE IF NOT EXISTS karyawan (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         nama TEXT NOT NULL,
-        jabatan TEXT NOT NULL,
+        email TEXT UNIQUE NOT NULL,
+        password TEXT NOT NULL,
+        jabatan TEXT,
         gaji_pokok REAL DEFAULT 0,
-        email TEXT,
-        password TEXT,
-        role TEXT DEFAULT 'karyawan'
+        role TEXT DEFAULT 'karyawan',
+        status TEXT DEFAULT 'pending'
     )`, (err) => {
         if (!err) {
-            // 2. Cek struktur kolom secara aman menggunakan PRAGMA
-            db.all(`PRAGMA table_info(karyawan)`, (pragmaErr, columns) => {
-                if (!pragmaErr) {
-                    // Cari tahu apakah kolom 'gaji_pokok' sudah ada
-                    const hasGajiPokok = columns.some(col => col.name === 'gaji_pokok');
-                    
-                    // Kalau BELUM ada, baru kita jalankan ALTER TABLE
-                    if (!hasGajiPokok) {
-                        db.run(`ALTER TABLE karyawan ADD COLUMN gaji_pokok REAL DEFAULT 0`, (alterErr) => {
-                            if (!alterErr) console.log("⚡ Kolom 'gaji_pokok' berhasil ditambahkan!");
-                        });
-                    } else {
-                        console.log("✅ Tabel 'karyawan' dan struktur kolom sudah aman!");
-                    }
-                }
-            });
+            // Masukkan Admin secara otomatis ke database server jika belum ada
+            db.run(`INSERT OR IGNORE INTO karyawan (id, nama, email, password, jabatan, gaji_pokok, role, status) 
+                    VALUES (2, 'Admin Payroll', 'admin@company.com', 'admin123', 'Administrator', 0, 'admin', 'active')`);
+            
+            console.log("✅ Tabel 'karyawan' dan Akun Admin Payroll siap!");
         }
     });
 });
