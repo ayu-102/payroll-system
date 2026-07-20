@@ -38,6 +38,10 @@ db.serialize(() => {
     status TEXT DEFAULT 'Paid',
     FOREIGN KEY(karyawan_id) REFERENCES karyawan(id)
 )`);
+
+        // Tambahkan di dalam db.serialize
+db.run(`INSERT OR IGNORE INTO karyawan (id, nama, email, password, jabatan, gaji_pokok, role, status) 
+        VALUES (2, 'Admin Payroll', 'admin@company.com', 'admin123', 'Administrator', 0, 'admin', 'active')`);
 });
 
 export default db;

@@ -55,10 +55,6 @@ db.serialize(() => {
 app.post('/api/login', (req, res) => {
     const { email, password } = req.body;
 
-    if (email === 'admin@company.com' && password === 'admin123') {
-        return res.json({ id: 0, nama: 'Super Admin HRD', role: 'admin' });
-    }
-
     db.get(`SELECT id, nama, role FROM karyawan WHERE email = ? AND password = ?`, [email, password], (err, row) => {
         if (err || !row) return res.status(401).json({ error: 'Email atau Password salah' });
         res.json(row);
