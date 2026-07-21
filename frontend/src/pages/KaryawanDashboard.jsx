@@ -133,7 +133,7 @@ const handlePrintSlip = (p) => {
         </head>
         <body>
           <div class="header">
-            <h2>PT. MAJU MUNDUR SEJAHTERA</h2>
+            <h2>GB PARKING</h2>
             <p>SLIP GAJI KARYAWAN - PERIODE ${p.periode.toUpperCase()}</p>
           </div>
           <div class="details">

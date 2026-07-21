@@ -248,7 +248,7 @@ const handleSubmitPayroll = async (e) => {
         </head>
         <body>
           <div class="header">
-            <h2>PT. MAJU MUNDUR SEJAHTERA</h2>
+            <h2>GB PARKING</h2>
             <p>SLIP GAJI KARYAWAN - PERIODE ${p.periode.toUpperCase()}</p>
           </div>
           <div class="details">
@@ -282,7 +282,7 @@ const handleDownloadPDF = () => {
     
     doc.setFont("helvetica", "bold");
     doc.setFontSize(18);
-    doc.text("PT. MAJU MUNDUR SEJAHTERA", 14, 20);
+    doc.text("BG PARKING", 14, 20);
     
     doc.setFontSize(10);
     doc.setFont("helvetica", "normal");

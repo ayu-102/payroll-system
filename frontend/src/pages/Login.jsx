@@ -266,7 +266,7 @@ export default function Login({ onLogin }) {
         )}
 
         <div className="mt-6 bg-gray-50 p-3 rounded-xl border border-gray-100 text-[10px] text-gray-400 text-center font-medium">
-          PT. MAJU MUNDUR SEJAHTERA • E-Payroll System
+          GB PARKING • E-Payroll System
         </div>
       </div>
     </div>

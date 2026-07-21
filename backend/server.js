@@ -20,27 +20,7 @@ app.use(express.json());
 // =========================================================================
 // ANTI-CRASH DATABASE CHECKER (Sesuai dengan database.js)
 // =========================================================================
-db.serialize(() => {
-    // Pastikan tabel sesuai dengan yang ada di database.js
-    db.run(`CREATE TABLE IF NOT EXISTS karyawan (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        nama TEXT NOT NULL,
-        email TEXT UNIQUE NOT NULL,
-        password TEXT NOT NULL,
-        jabatan TEXT,
-        gaji_pokok REAL DEFAULT 0,
-        role TEXT DEFAULT 'karyawan',
-        status TEXT DEFAULT 'pending'
-    )`, (err) => {
-        if (!err) {
-            // Masukkan Admin secara otomatis ke database server jika belum ada
-            db.run(`INSERT OR IGNORE INTO karyawan (id, nama, email, password, jabatan, gaji_pokok, role, status) 
-                    VALUES (2, 'Admin Payroll', 'admin@company.com', 'admin123', 'Administrator', 0, 'admin', 'active')`);
-            
-            console.log("✅ Tabel 'karyawan' dan Akun Admin Payroll siap!");
-        }
-    });
-});
+
 
 // =========================================================================
 // AUTH ENDPOINT (Sistem Login)

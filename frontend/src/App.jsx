@@ -25,7 +25,7 @@ export default function App() {
           <nav className="!bg-white !text-gray-800 border-b border-gray-100 px-6 py-3 flex justify-between items-center shadow-sm font-sans">
             <div className="flex items-center gap-2 font-black tracking-wide text-slate-800 text-sm md:text-base">
   <i className="bi bi-lightning-charge-fill text-orange-500"></i> {/* Ikon Oranye */}
-  <span>PT. MAJU MUNDUR SEJAHTERA</span> {/* Teks Abu-abu Gelap Mewah */}
+  <span>GB PARKING</span> {/* Teks Abu-abu Gelap Mewah */}
 </div>
             <div className="flex items-center gap-4">
               <span className="text-xs bg-orange-800 text-gray-300 px-3 py-1 rounded-full border border-orange-700">
