@@ -47,25 +47,24 @@ export default function AdminDashboard() {
   const [inputGajiPokok, setInputGajiPokok] = useState('');
 
   // Ambil data ter-update
-  const fetchData = async () => {
-    try {
-      const resPayroll = await axios.get('http://localhost:5000/api/payroll');
-      setPayrolls(resPayroll.data);
+// Ambil data ter-update
+const fetchData = async () => {
+  try {
+    const resPayroll = await axios.get('https://payroll-system-1-usc4.onrender.com/api/payroll');
+    setPayrolls(resPayroll.data);
 
-      const resKaryawan = await axios.get('http://localhost:5000/api/karyawan');
-      setKaryawanList(resKaryawan.data);
-      
-      // Mengunci default dropdown input gaji hanya pada karyawan yang sudah 'active'
-      const karyawanAktif = resKaryawan.data.filter(k => k.status !== 'pending');
-      if (karyawanAktif.length > 0 && !form.karyawan_id) {
-        setForm(prev => ({ ...prev, karyawan_id: karyawanAktif[0]?.id }));
-      }
-    } catch (err) {
-      console.error("Gagal sinkronisasi data dengan server", err);
+    const resKaryawan = await axios.get('https://payroll-system-1-usc4.onrender.com/api/karyawan');
+    setKaryawanList(resKaryawan.data);
+
+    // Mengunci default dropdown input gaji hanya pada karyawan yang sudah 'active'
+    const karyawanAktif = resKaryawan.data.filter(k => k.status !== 'pending');
+    if (karyawanAktif.length > 0 && !form.karyawan_id) {
+      setForm(prev => ({ ...prev, karyawan_id: karyawanAktif[0]?.id }));
     }
-  };
-
-  useEffect(() => { fetchData(); }, []);
+  } catch (err) {
+    console.error("Gagal sinkronisasi data dengan server", err);
+  }
+};
 
 // Fungsi otomatis hitung rupiah lembur saat jam diketik
   const handleJamLemburChange = (value) => {
