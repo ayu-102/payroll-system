@@ -14,7 +14,7 @@ export default function KaryawanDashboard() {
 
   const fetchSlipKaryawan = async () => {
     try {
-      const res = await axios.get(`http://localhost:5000/api/payroll/karyawan/${karyawanId}`);
+      const res = await axios.get(`https://payroll-system-1-usc4.onrender.com/api/payroll/karyawan/${karyawanId}`);
       setPayrolls(res.data);
     } catch (err) {
       console.error("Gagal ambil data slip", err);
@@ -33,7 +33,7 @@ export default function KaryawanDashboard() {
     setLoadingPassword(true);
     try {
       // Menggunakan route ter-update /ubah-password/:id
-      await axios.put(`http://localhost:5000/api/karyawan/ubah-password/${karyawanId}`, {
+      await axios.put(`https://payroll-system-1-usc4.onrender.com/api/karyawan/ubah-password/${karyawanId}`, {
         password_baru: passwordBaru
       });
       alert('Password berhasil diperbarui! Gunakan password baru ini untuk login berikutnya.');
