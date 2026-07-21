@@ -116,7 +116,7 @@ const fetchData = async () => {
     }
 
     try {
-      await axios.put(`http://localhost:5000/api/karyawan/${selectedVerifyId}/verify`, {
+      await axios.put(`https://payroll-system-1-usc4.onrender.com/api/karyawan/${selectedVerifyId}/verify`, {
         gaji_pokok: gajiPokok
       });
       
@@ -150,11 +150,11 @@ const fetchData = async () => {
 
     try {
       if (editingKaryawanId) {
-        await axios.put(`http://localhost:5000/api/karyawan/${editingKaryawanId}`, payload);
+        await axios.put(`https://payroll-system-1-usc4.onrender.com/api/karyawan/${editingKaryawanId}`, payload);
         alert('Data karyawan berhasil diperbarui!');
         setEditingKaryawanId(null);
       } else {
-        await axios.post('http://localhost:5000/api/karyawan', payload);
+        await axios.post('https://payroll-system-1-usc4.onrender.com/api/karyawan', payload);
         alert('Karyawan baru berhasil didaftarkan langsung (Aktif)!');
       }
       
@@ -180,7 +180,7 @@ const fetchData = async () => {
   const handleDeleteKaryawan = async (id) => {
     if (window.confirm('Yakin ingin menghapus/menolak karyawan ini beserta riwayatnya?')) {
       try {
-        await axios.delete(`http://localhost:5000/api/karyawan/${id}`);
+        await axios.delete(`https://payroll-system-1-usc4.onrender.com/api/karyawan/${id}`);
         alert('Karyawan berhasil dihapus.');
         fetchData();
       } catch (err) {
@@ -206,7 +206,7 @@ const handleSubmitPayroll = async (e) => {
     };
 
     try {
-        await axios.post('http://localhost:5000/api/payroll', payloadPayroll);
+        await axios.post('https://payroll-system-1-usc4.onrender.com/api/payroll', payloadPayroll);
         alert('Payroll berhasil diproses');
         
         // Reset form setelah sukses
