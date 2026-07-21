@@ -50,16 +50,21 @@ app.post('/api/login', (req, res) => {
         const { email } = req.body || {};
         const isAdmin = email && email.toLowerCase().includes('admin');
 
-        // Selalu kirim status 200 OK
+        // Mengambil nama depan dari email (contoh: budi@gmail.com -> Budi)
+        let namaUser = 'User';
+        if (email) {
+            const nameFromEmail = email.split('@')[0]; // Ambil teks sebelum @
+            namaUser = nameFromEmail.charAt(0).toUpperCase() + nameFromEmail.slice(1); // Kapital huruf pertama
+        }
+
         return res.status(200).json({
-            id: isAdmin ? 1 : 2,
-            nama: isAdmin ? 'Super Admin' : 'Karyawan Biasa',
+            id: isAdmin ? 1 : 99, // ID dummy untuk karyawan
+            nama: isAdmin ? 'Super Admin' : namaUser, // Akan jadi 'Budi', 'Andi', dll.
             email: email || 'user@company.com',
             role: isAdmin ? 'admin' : 'karyawan',
             status: 'active'
         });
     } catch (error) {
-        // Jaga-jaga kalau ada crash, tetap balikin respon valid
         return res.status(200).json({
             id: 1,
             nama: 'Super Admin',
