@@ -46,33 +46,40 @@ db.serialize(() => {
 // AUTH ENDPOINT (Sistem Login)
 // =========================================================================
 app.post('/api/login', (req, res) => {
-    try {
-        const { email } = req.body || {};
-        const isAdmin = email && email.toLowerCase().includes('admin');
+  const { email, password } = req.body;
 
-        // Mengambil nama depan dari email (contoh: budi@gmail.com -> Budi)
-        let namaUser = 'User';
-        if (email) {
-            const nameFromEmail = email.split('@')[0]; // Ambil teks sebelum @
-            namaUser = nameFromEmail.charAt(0).toUpperCase() + nameFromEmail.slice(1); // Kapital huruf pertama
-        }
+  // Cek apakah akun Admin khusus
+  if (email === 'admin@company.com' && password === 'admin') {
+    return res.json({
+      id: 1,
+      nama: 'Super Admin',
+      email: email,
+      role: 'admin',
+      status: 'active'
+    });
+  }
 
-        return res.status(200).json({
-            id: isAdmin ? 1 : 99, // ID dummy untuk karyawan
-            nama: isAdmin ? 'Super Admin' : namaUser, // Akan jadi 'Budi', 'Andi', dll.
-            email: email || 'user@company.com',
-            role: isAdmin ? 'admin' : 'karyawan',
-            status: 'active'
-        });
-    } catch (error) {
-        return res.status(200).json({
-            id: 1,
-            nama: 'Super Admin',
-            email: 'admin@company.com',
-            role: 'admin',
-            status: 'active'
-        });
+  // Jika bukan admin, cari karyawan ASLI dari database berdasarkan email & password
+  const query = `SELECT * FROM karyawan WHERE email = ? AND password = ?`;
+  
+  db.get(query, [email, password], (err, user) => {
+    if (err) {
+      return res.status(500).json({ error: 'Terjadi kesalahan server' });
     }
+
+    if (!user) {
+      return res.status(401).json({ error: 'Email atau password salah' });
+    }
+
+    // Jika ketemu di database, kembalikan data user ASLI (beserta ID aslinya!)
+    res.json({
+      id: user.id,            // ID asli dari DB (misal ID: 2 untuk Budi)
+      nama: user.nama,        // Nama asli dari DB
+      email: user.email,      // Email asli
+      role: user.role || 'karyawan',
+      status: user.status || 'active'
+    });
+  });
 });
 
 // =========================================================================

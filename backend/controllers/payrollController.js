@@ -36,6 +36,7 @@ export const createPayroll = (req, res) => {
     });
 };
 // Ambil riwayat slip gaji sendiri (Untuk Sisi Karyawan)
+// Ambil riwayat slip gaji sendiri (Untuk Sisi Karyawan)
 export const getSlipKaryawan = (req, res) => {
     const { id } = req.params;
     const query = `
@@ -45,8 +46,12 @@ export const getSlipKaryawan = (req, res) => {
         WHERE k.id = ? 
         ORDER BY p.id DESC
     `;
+    
     db.all(query, [id], (err, rows) => {
-        if (err) return res.status(500).json({ error: err.message });
+        if (err) {
+            return res.status(500).json({ error: err.message });
+        }
+        // Mengembalikan data asli dari database
         res.json(rows);
     });
 };
